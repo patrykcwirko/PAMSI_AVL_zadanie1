@@ -11,8 +11,24 @@
 
 #include "AVL.h"
 
+void ustawZiarnoRanda() {
+    struct timeval te;
+    gettimeofday(&te, NULL);
+    unsigned int iseed = te.tv_usec;
+    srand (iseed);
+}
+
 void wypelnijTablice(int * t, int cnt) {
-	
+    int id;
+    memset(t,0,cnt);
+    ustawZiarnoRanda();
+    for (int i = 0 ; i < cnt ; ++i) {
+        //unika dodawania zer
+        do
+        	id = rand() % cnt;
+        while (t[id]);
+        t[id] = i + 1;
+    }
 }
 
 int main(int argc, char *argv[]) {
@@ -27,7 +43,7 @@ int main(int argc, char *argv[]) {
         avl.dodaj(tWartosci[i]);
     }
     if(WYSWIETL) avl.print();
-	
+
 	wysokosc = avl.wysokosc();
     printf("Wysokosc: %d", wysokosc);
     for (int i = 0 ; i < ilosc ; ++i) {
