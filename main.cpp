@@ -35,28 +35,34 @@ int main(int argc, char *argv[]) {
     int  wysokosc;
     char stop;
     int ilosc = ILOSC;
+    int dlugosc;
 //    int * tWartosci = new int[ilosc];
 //    wypelnijTablice(tWartosci, ilosc);
-//    int tWartosci[] = { 1,2,3,4,5 };
-    int tWartosci[] = { -1,-2,-3,-4,-5 };
+    int tWartosci[] = { 6,1,3,2,15,13,10,5,14,7,11,18 };
 
-    int dlugosc = sizeof(tWartosci)/sizeof(int);
+    dlugosc = sizeof(tWartosci)/sizeof(int);
     for (int i = 0 ; i < dlugosc ; ++i) {
         if( avl.dodaj(tWartosci[i]) ) {
             avl.print();
-            stop = getchar();
-            avl.zbalansuj();
-            avl.print();
+//            avl.zbalansuj();
+//            avl.print();
             stop = getchar();
         }
         system("cls");
     }
 
+    avl.print();
+    stop = getchar();
+
 	wysokosc = avl.wysokosc();
-    printf("Wysokosc: %d", wysokosc);
-    for (int i = 0 ; i < ilosc ; ++i) {
-        avl.usun(i + 1);
+    printf("Wysokosc po dodaniu: %d\n", wysokosc);
+    dlugosc = sizeof(tWartosci)/sizeof(int);
+    for (int i = 0 ; i < dlugosc ; ++i) {
+        avl.usun( tWartosci[i] );
     }
+
+	wysokosc = avl.wysokosc();
+    printf("Wysokosc po usunieciu: %d\n", wysokosc);
 
 //    delete [] tWartosci;
     return 0;

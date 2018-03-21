@@ -29,7 +29,11 @@ class CBST {
         TWezel * korzen;
         TWezel * punktZwrotny;
 
+        TWezel * poprzedni(TWezel * wezel);
+        TWezel * nastepny(TWezel * wezel);
+
     private:
+        int wysokosc(TWezel * wezel);
         void print(char symbol, TWezel * rodzic, int poziom) const;
 };
 

@@ -1,7 +1,22 @@
 #include "BST.h"
 
-TWezel * CBST::wyszukaj(int kklucz) {
-	return NULL;
+TWezel * CBST::wyszukaj(int klucz) {
+    TWezel * r = korzen;
+    while ( true ) {
+        if ( !r ) {
+            return NULL;
+        }
+        if ( klucz == r->klucz ) {
+            return r;
+        }
+        // jesli klucz < od wartosci klucza w wezle, to na lewo
+        if ( klucz < r->klucz ) {
+            r = r->lewy;
+        // jesli klucz > od wartosci klucza w wezle, to na prawo
+        } else {
+            r = r->prawy;
+        }
+    }
 }
 
 bool CBST::dodaj(int klucz) {
@@ -58,11 +73,110 @@ bool CBST::dodaj(int klucz) {
 }
 
 bool CBST::usun(int klucz) {
-	return false;
+    // 1. wyszukuje wezel do usuniecia dla zadanego klucza
+    TWezel * wezel = wyszukaj( klucz );
+    if ( !wezel ) {
+        return false;
+    }
+    // 2.1. jesli wezel nie ma potomkow
+    if ( !wezel->lewy && !wezel->prawy ) {
+        // 2.1.1. i znaleiony wezel jest korzeniem
+        if ( wezel == korzen ) {
+            korzen = NULL;
+        } else {
+            // 2.1.2. lub znaleziony wezel ma klucz < od klucza w swoim rodzicu,
+            // ustawia na NULL odpowiednio
+            if ( wezel->klucz < wezel->rodzic->klucz ) {
+                wezel->rodzic->lewy = NULL;
+            } else {
+                wezel->rodzic->prawy = NULL;
+            }
+        }
+    // 2.2. jesli wezel ma jednego potomkow
+    } else if ( !wezel->lewy || !wezel->prawy ) {
+        // 2.2.1.
+        if ( wezel == korzen ) {
+            // 2.2.1.1. jesli korzen ma odpowiednio na lewo lub prawo
+            // przesuwa odpowiedniego jako korzen
+            if ( wezel->lewy ) {
+                korzen = wezel->lewy;
+            } else {
+                korzen = wezel->prawy;
+            }
+            korzen->rodzic = NULL;
+        // 2.2.2. znaleziony wezel ma klucz < od klucza w rodzicu
+        } else if ( wezel->klucz < wezel->rodzic->klucz ) {
+            // 2.2.2.1 wiec jeli jest lewy to zamiana:
+            if ( wezel->lewy ) {
+                // w rodzicu z lewej na lewego z wezla
+                wezel->rodzic->lewy = wezel->lewy;
+                // w wezle rodzic lewego z rodzica wezla
+                wezel->lewy->rodzic = wezel->rodzic;
+            } else {
+                // w rodzicu z lewej na prawego z wezla
+                wezel->rodzic->lewy = wezel->prawy;
+                wezel->prawy->rodzic = wezel->rodzic;
+            }
+        // 2.2.3.
+        } else {
+            if ( wezel->lewy ) {
+                wezel->rodzic->prawy = wezel->lewy;
+                wezel->lewy->rodzic = wezel->rodzic;
+            } else {
+                wezel->rodzic->prawy = wezel->prawy;
+                wezel->prawy->rodzic = wezel->rodzic;
+            }
+        }
+    // 2.3. jesli wezel ma obu potomkow
+    } else {
+        // 2.3.1. szuka nastepnego wezla (od prawego na lewo)
+        TWezel * nowyWezel = nastepny( wezel );
+        // podmienia relacje
+        wezel->klucz = nowyWezel->klucz;
+        if ( nowyWezel == wezel->prawy ) {
+            wezel->prawy = nowyWezel->prawy;
+            if ( nowyWezel->prawy ) {
+                nowyWezel->prawy->rodzic = wezel;
+            }
+        } else {
+            nowyWezel->rodzic->prawy = nowyWezel->prawy;
+            if ( nowyWezel->prawy ) {
+                nowyWezel->prawy->rodzic = nowyWezel->rodzic;
+            }
+        }
+        wezel = nowyWezel;
+    }
+    delete wezel;
+    return true;
 }
 
 int CBST::wysokosc(void) {
-	return 0;
+    if ( !korzen ) {
+        return 0;
+    }
+    return wysokosc( korzen );
+}
+
+int CBST::wysokosc(TWezel * wezel) {
+	if ( !wezel->lewy && !wezel->prawy ) {
+        return 0;
+    }
+    // 1. najpierw sprawdza, czy nie ma nic na lewo i zlicza dalej na prawo
+    if ( !wezel->lewy ) {
+        return (wysokosc( wezel->prawy ) + 1);
+    }
+    // 2. jesli prawy jest pusty, to na lewo i zlicza dalej
+    if ( !wezel->prawy ) {
+        return (wysokosc( wezel->lewy) +1);
+    }
+    int l = wysokosc( wezel->lewy);
+    int r = wysokosc( wezel->prawy);
+    // wybiera wyzsza wartosc
+    if ( l > r ) {
+        return ++l;
+    } else {
+        return ++r;
+    }
 }
 
 void CBST::print() const {
@@ -81,4 +195,28 @@ void CBST::print(char symbol, TWezel * rodzic, int poziom) const {
     }
     printf( "%c(%d)\n", symbol, rodzic->klucz );
     print(PRAWY, rodzic->prawy, poziom+1);
+}
+
+// poprzedni od lewego na prawo
+TWezel * CBST::poprzedni(TWezel * wezel) {
+    if ( !wezel->lewy ) {
+        return NULL;
+    }
+    TWezel * dziecko = wezel->lewy;
+    while ( dziecko->prawy ) {
+        dziecko = dziecko->prawy;
+    }
+    return dziecko;
+}
+
+// nastepny od prawego na lewego
+TWezel * CBST::nastepny(TWezel * wezel) {
+    if (!wezel->prawy ) {
+        return NULL;
+    }
+    TWezel * dziecko = wezel->prawy;
+    while ( dziecko->lewy ) {
+        dziecko = dziecko->lewy;
+    }
+    return dziecko;
 }
