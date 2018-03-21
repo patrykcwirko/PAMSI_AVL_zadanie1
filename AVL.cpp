@@ -2,7 +2,7 @@
 #include "BST.h"
 
 bool CAVL::dodaj(int klucz) {
-	return 0;
+    return CBST::dodaj( klucz );
 }
 
 int CAVL::zbalansuj() {

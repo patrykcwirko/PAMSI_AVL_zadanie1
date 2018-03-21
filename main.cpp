@@ -4,18 +4,17 @@
 #include <inttypes.h>
 #include <math.h>
 #include <limits.h>
-
-#define WYSWIETL 1
-
-#define ILOSC 20
+#include <cstring>
 
 #include "AVL.h"
+
+#define ILOSC 10
 
 void ustawZiarnoRanda() {
     struct timeval te;
     gettimeofday(&te, NULL);
-    unsigned int iseed = te.tv_usec;
-    srand (iseed);
+    unsigned int ziarno = te.tv_usec;
+    srand (ziarno);
 }
 
 void wypelnijTablice(int * t, int cnt) {
@@ -33,16 +32,25 @@ void wypelnijTablice(int * t, int cnt) {
 
 int main(int argc, char *argv[]) {
     CAVL avl;
-    int ilosc = ILOSC;
     int  wysokosc;
-    int * tWartosci = new int[ilosc];
+    char stop;
+    int ilosc = ILOSC;
+//    int * tWartosci = new int[ilosc];
+//    wypelnijTablice(tWartosci, ilosc);
+//    int tWartosci[] = { 1,2,3,4,5 };
+    int tWartosci[] = { -1,-2,-3,-4,-5 };
 
-    wypelnijTablice(tWartosci, ilosc);
-
-    for (int i = 0 ; i < ilosc ; ++i) {
-        avl.dodaj(tWartosci[i]);
+    int dlugosc = sizeof(tWartosci)/sizeof(int);
+    for (int i = 0 ; i < dlugosc ; ++i) {
+        if( avl.dodaj(tWartosci[i]) ) {
+            avl.print();
+            stop = getchar();
+            avl.zbalansuj();
+            avl.print();
+            stop = getchar();
+        }
+        system("cls");
     }
-    if(WYSWIETL) avl.print();
 
 	wysokosc = avl.wysokosc();
     printf("Wysokosc: %d", wysokosc);
@@ -50,6 +58,6 @@ int main(int argc, char *argv[]) {
         avl.usun(i + 1);
     }
 
-    delete [] tWartosci;
+//    delete [] tWartosci;
     return 0;
 }

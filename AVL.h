@@ -9,11 +9,11 @@
 class CAVL : public CBST
 {
     public:
-        CAVL(void) : CBST() { }
+        CAVL(void) : CBST() {}
 		bool dodaj(int klucz);
+		int zbalansuj();
 
     private:
-        int zbalansuj();
         void obrocLL(TWezel * wezel);
         void obrocRR(TWezel * wezel);
         void obrocLR(TWezel * wezel);
