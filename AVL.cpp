@@ -6,12 +6,12 @@ bool CAVL::dodaj(int klucz) {
 }
 
 int CAVL::zbalansuj() {
-//    printf("\nCAVL::zbalansuj\n");
+//    printf("\n CAVL::zbalansuj\n");
     TWezel * wezel = punktZwrotny;
     while ( wezel->rodzic && wezel->balans ) {
         if ( wezel->klucz < wezel->rodzic->klucz ) {
             --wezel->rodzic->balans;
-            if ( wezel->rodzic->balans == WAGA_PLUS_EXTRA ) {
+            if ( wezel->rodzic->balans == WAGA_MINUS_EXTRA ) {
                 if ( wezel->balans == WAGA_PLUS_JEDEN ) {
                     obrocLR( wezel->rodzic );
                 } else {
@@ -20,7 +20,7 @@ int CAVL::zbalansuj() {
             }
         } else {
             ++wezel->rodzic->balans;
-            if ( wezel->rodzic->balans == WAGA_MINUS_EXTRA ) {
+            if ( wezel->rodzic->balans == WAGA_PLUS_EXTRA ) {
                 if ( wezel->balans == WAGA_MINUS_JEDEN ) {
                     obrocRL( wezel->rodzic );
                 } else {

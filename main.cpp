@@ -9,28 +9,8 @@
 #include "AVL.h"
 
 #define ILOSC 10
-#define PRT_DODAJ 1
+#define PRT_DODAJ 0
 #define PRT_USUN 0
-
-void ustawZiarnoRanda() {
-    struct timeval te;
-    gettimeofday(&te, NULL);
-    unsigned int ziarno = te.tv_usec;
-    srand (ziarno);
-}
-
-void wypelnijTablice(int * t, int cnt) {
-    int id;
-    memset(t,0,cnt);
-    ustawZiarnoRanda();
-    for (int i = 0 ; i < cnt ; ++i) {
-        //unika dodawania zer
-        do
-        	id = rand() % cnt;
-        while (t[id]);
-        t[id] = i + 1;
-    }
-}
 
 int main(int argc, char *argv[]) {
     CAVL avl;
@@ -38,11 +18,7 @@ int main(int argc, char *argv[]) {
     char stop;
     int ilosc = ILOSC;
     int dlugosc;
-//    int * tWartosci = new int[ilosc];
-//    wypelnijTablice(tWartosci, ilosc);
-//    int tWartosci[] = { 6,1,3,2,15,13,10,5,14,7,11,18 };
-    int tWartosci[] = { 6,3,2,5 };
-//    int tWartosci[] = { 6,3,2,5,15,13 };
+    int tWartosci[] = { 6,3,2,1 };
 
     dlugosc = sizeof(tWartosci)/sizeof(int);
     for (int i = 0 ; i < dlugosc ; ++i) {
@@ -54,9 +30,9 @@ int main(int argc, char *argv[]) {
             if(PRT_DODAJ) avl.print();
             if(PRT_DODAJ) stop = getchar();
         }
-//        system("cls");
+        system("cls");
     }
-    printf("Skonczone drzewo BST/AVL\n");
+    printf("Zbalansowane drzewo BST/AVL\n");
     avl.print();
     stop = getchar();
 
@@ -76,6 +52,7 @@ int main(int argc, char *argv[]) {
 
 	wysokosc = avl.wysokosc();
     printf("Wysokosc po usunieciu: %d\n", wysokosc);
+    avl.print();
 
 //    delete [] tWartosci;
     return 0;

@@ -22,10 +22,6 @@ TWezel * CBST::wyszukaj(int klucz) {
 bool CBST::dodaj(int klucz) {
 	// 1. domyslnie tworzy wezla z zadanym kluczem
     TWezel * nowyWezel = new TWezel(klucz);
-//    nowyWezel->klucz = klucz;
-//    nowyWezel->lewy = NULL;
-//    nowyWezel->prawy = NULL;
-//    nowyWezel->balans = 0; //dla AVL, na potem...
     if ( !korzen ) {
         korzen = nowyWezel;
         nowyWezel->rodzic = NULL;
