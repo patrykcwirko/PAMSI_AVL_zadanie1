@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1521995059 source:c:\var\workspace\pamsi\avl_zadanie1\main.cpp
+1521997943 source:c:\var\workspace\pamsi\avl_zadanie1\main.cpp
 	<stdio.h>
 	<stdlib.h>
 	<sys/time.h>
@@ -18,7 +18,7 @@
 	<stdio.h>
 	"stddef.h"
 
-1521995918 source:c:\var\workspace\pamsi\avl_zadanie1\avl.cpp
+1521998283 source:c:\var\workspace\pamsi\avl_zadanie1\avl.cpp
 	"AVL.h"
 	"BST.h"
 
