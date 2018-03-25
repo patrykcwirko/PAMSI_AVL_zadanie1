@@ -1,20 +1,20 @@
 #include "BST.h"
 
 TWezel * CBST::wyszukaj(int klucz) {
-    TWezel * r = korzen;
+    TWezel * w = korzen;
     while ( true ) {
-        if ( !r ) {
+        if ( !w ) {
             return NULL;
         }
-        if ( klucz == r->klucz ) {
-            return r;
+        if ( klucz == w->klucz ) {
+            return w;
         }
         // jesli klucz < od wartosci klucza w wezle, to na lewo
-        if ( klucz < r->klucz ) {
-            r = r->lewy;
+        if ( klucz < w->klucz ) {
+            w = w->lewy;
         // jesli klucz > od wartosci klucza w wezle, to na prawo
         } else {
-            r = r->prawy;
+            w = w->prawy;
         }
     }
 }
