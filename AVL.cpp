@@ -38,6 +38,30 @@ int CAVL::zbalansuj() {
 
 void CAVL::obrocLL(TWezel * wezel) {
     printf("LL\n");
+    TWezel * dziecko = wezel->lewy;
+    wezel->lewy = dziecko->prawy;
+    if ( dziecko->prawy ) {
+        dziecko->prawy->rodzic = wezel;
+    }
+    dziecko->prawy = wezel;
+    dziecko->rodzic = wezel->rodzic;
+    if ( wezel->rodzic ) {
+        if ( dziecko->klucz < wezel->rodzic->klucz ) {
+            wezel->rodzic->lewy = dziecko;
+        } else {
+            wezel->rodzic->prawy = dziecko;
+        }
+    } else {
+        korzen = dziecko;
+    }
+    wezel->rodzic = dziecko;
+    if ( dziecko->balans == WAGA_MINUS_JEDEN ) {
+        wezel->balans = WAGA_ZERO;
+        dziecko->balans = WAGA_ZERO;
+    } else {
+        wezel->balans = WAGA_MINUS_JEDEN;
+        dziecko->balans = WAGA_PLUS_JEDEN;
+    }
 }
 
 void CAVL::obrocRR(TWezel * wezel) {
