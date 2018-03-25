@@ -6,6 +6,13 @@
 
 #include "BST.h"
 
+#define WAGA_PLUS_EXTRA 2
+#define WAGA_PLUS_JEDEN 1
+#define WAGA_ZERO 0
+#define WAGA_MINUS_JEDEN -1
+#define WAGA_MINUS_EXTRA -2
+
+
 class CAVL : public CBST
 {
     public:

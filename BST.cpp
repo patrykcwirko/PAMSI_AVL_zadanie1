@@ -21,11 +21,11 @@ TWezel * CBST::wyszukaj(int klucz) {
 
 bool CBST::dodaj(int klucz) {
 	// 1. domyslnie tworzy wezla z zadanym kluczem
-    TWezel * nowyWezel = new TWezel;
-    nowyWezel->klucz = klucz;
-    nowyWezel->lewy = NULL;
-    nowyWezel->prawy = NULL;
-    nowyWezel->balans = 0; //dla AVL, na potem...
+    TWezel * nowyWezel = new TWezel(klucz);
+//    nowyWezel->klucz = klucz;
+//    nowyWezel->lewy = NULL;
+//    nowyWezel->prawy = NULL;
+//    nowyWezel->balans = 0; //dla AVL, na potem...
     if ( !korzen ) {
         korzen = nowyWezel;
         nowyWezel->rodzic = NULL;
@@ -191,7 +191,7 @@ void CBST::print(char symbol, TWezel * rodzic, int poziom) const {
     if (rodzic == NULL) return;
     print(LEWY, rodzic->lewy, poziom+1);
     for (int i=0; i<poziom; i++) {
-        printf("  ");
+        printf(ODSTEP);
     }
     printf( "%c(%d)\n", symbol, rodzic->klucz );
     print(PRAWY, rodzic->prawy, poziom+1);

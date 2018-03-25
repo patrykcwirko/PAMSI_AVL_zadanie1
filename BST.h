@@ -7,6 +7,7 @@
 #define LEWY 'L'
 #define PRAWY 'P'
 #define KORZEN '#'
+#define ODSTEP "   "
 
 struct TWezel {
 	int klucz;
@@ -14,6 +15,7 @@ struct TWezel {
 	TWezel * rodzic;
 	TWezel * lewy;
 	TWezel * prawy;
+	TWezel(int kluczyk) : klucz(kluczyk), balans(0), rodzic(NULL), lewy(NULL), prawy(NULL) {}
 };
 
 class CBST {
