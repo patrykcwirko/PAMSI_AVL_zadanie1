@@ -26,6 +26,9 @@ class CBST {
         bool usun(int klucz);
         int wysokosc(void);
         void print() const;
+        void print_inOrder() const;
+        void print_preOrder() const;
+        void print_postOrder() const;
 
     protected:
         TWezel * korzen;
@@ -37,6 +40,9 @@ class CBST {
     private:
         int wysokosc(TWezel * wezel);
         void print(char symbol, TWezel * rodzic, int poziom) const;
+        void print_inOrder(char symbol, TWezel * wezel, int poziom) const;
+        void print_preOrder(char symbol, TWezel * wezel, int poziom) const;
+        void print_postOrder(char symbol, TWezel * wezel, int poziom) const;
 };
 
 #endif

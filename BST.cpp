@@ -183,6 +183,30 @@ void CBST::print() const {
     }
 }
 
+void CBST::print_inOrder() const {
+    if (korzen == NULL) {
+        printf("# ---.\n");
+    } else {
+        print_inOrder(KORZEN, korzen, 0);
+    }
+}
+
+void CBST::print_postOrder() const {
+    if (korzen == NULL) {
+        printf("# ---.\n");
+    } else {
+        print_postOrder(KORZEN, korzen, 0);
+    }
+}
+
+void CBST::print_preOrder() const {
+    if (korzen == NULL) {
+        printf("# ---.\n");
+    } else {
+        print_preOrder(KORZEN, korzen, 0);
+    }
+}
+
 void CBST::print(char symbol, TWezel * rodzic, int poziom) const {
     if (rodzic == NULL) return;
     print(LEWY, rodzic->lewy, poziom+1);
@@ -191,6 +215,36 @@ void CBST::print(char symbol, TWezel * rodzic, int poziom) const {
     }
     printf( "%c(%d)\n", symbol, rodzic->klucz );
     print(PRAWY, rodzic->prawy, poziom+1);
+}
+
+void CBST::print_inOrder(char symbol, TWezel * wezel, int poziom) const {
+    if ( wezel == NULL ) return;
+    print_inOrder(LEWY, wezel->lewy, poziom+1);
+    for (int i=0; i<poziom; i++) {
+        printf(ODSTEP);
+    }
+    printf( "%c(%d)\n", symbol, wezel->klucz );
+    print_inOrder(PRAWY, wezel->prawy, poziom+1);
+}
+
+void CBST::print_preOrder(char symbol, TWezel * wezel, int poziom) const {
+    if ( wezel == NULL ) return;
+    for (int i=0; i<poziom; i++) {
+        printf(ODSTEP);
+    }
+    printf( "%c(%d)\n", symbol, wezel->klucz );
+    print_preOrder(LEWY, wezel->lewy, poziom+1);
+    print_preOrder(PRAWY, wezel->prawy, poziom+1);
+}
+
+void CBST::print_postOrder(char symbol, TWezel * wezel, int poziom) const {
+    if ( wezel == NULL ) return;
+    print_postOrder(LEWY, wezel->lewy, poziom+1);
+    print_postOrder(PRAWY, wezel->prawy, poziom+1);
+    for (int i=0; i<poziom; i++) {
+        printf(ODSTEP);
+    }
+    printf( "%c(%d)\n", symbol, wezel->klucz );
 }
 
 // poprzedni od lewego na prawo

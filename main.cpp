@@ -8,8 +8,9 @@
 
 #include "AVL.h"
 
-#define PRT_DODAJ 0
-#define PRT_USUN 1
+#define PRT_DODAJ 1
+#define PRT_USUN 0
+#define PRT_ORDERS 1
 
 int main(int argc, char *argv[]) {
     CAVL avl;
@@ -37,8 +38,15 @@ int main(int argc, char *argv[]) {
     avl.print();
     stop = getchar();
 
+    if(PRT_ORDERS) printf("\nin-order\n");
+    if(PRT_ORDERS) avl.print_inOrder();
+    if(PRT_ORDERS) printf("\npre-order\n");
+    if(PRT_ORDERS) avl.print_preOrder();
+    if(PRT_ORDERS) printf("\npost-order\n");
+    if(PRT_ORDERS) avl.print_postOrder();
+
 	wysokosc = avl.wysokosc();
-    printf("Wysokosc po dodaniu: %d\n", wysokosc);
+    printf("\nWysokosc po dodaniu: %d\n", wysokosc);
     ilosc = sizeof(tWartosci)/sizeof(int);
     for (int i = 0 ; i < ilosc ; ++i) {
         if( avl.usun( tWartosci[i] ) ) {
