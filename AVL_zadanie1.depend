@@ -14,7 +14,7 @@
 	"stddef.h"
 	"BST.h"
 
-1522095680 c:\var\workspace\pamsi\avl_zadanie1\bst.h
+1522096176 c:\var\workspace\pamsi\avl_zadanie1\bst.h
 	<stdio.h>
 	"stddef.h"
 
@@ -22,6 +22,6 @@
 	"AVL.h"
 	"BST.h"
 
-1522095753 source:c:\var\workspace\pamsi\avl_zadanie1\bst.cpp
+1522096176 source:c:\var\workspace\pamsi\avl_zadanie1\bst.cpp
 	"BST.h"
 

@@ -8,9 +8,9 @@
 
 #include "AVL.h"
 
-#define PRT_DODAJ 1
-#define PRT_USUN 0
-#define PRT_ORDERS 1
+#define PRT_DODAJ 0
+#define PRT_USUN 1
+#define PRT_ORDERS 0
 
 int main(int argc, char *argv[]) {
     CAVL avl;
@@ -50,11 +50,7 @@ int main(int argc, char *argv[]) {
     ilosc = sizeof(tWartosci)/sizeof(int);
     for (int i = 0 ; i < ilosc ; ++i) {
         if( avl.usun( tWartosci[i] ) ) {
-            if(PRT_USUN) printf("Usuwanie <%d> przed zbalansowaniem\n", tWartosci[i] );
-            if(PRT_USUN) avl.print();
-            if(PRT_USUN) avl.zbalansuj();
-            if(PRT_USUN) printf("\n");
-            if(PRT_USUN) printf("Usuwanie <%d> po zbalansowaniu\n", tWartosci[i] );
+            if(PRT_USUN) printf("Drzewo po usunieciu <%d>\n", tWartosci[i] );
             if(PRT_USUN) avl.print();
             if(PRT_USUN) stop = getchar();
         }
