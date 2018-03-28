@@ -37,7 +37,7 @@ int CAVL::zbalansuj() {
 }
 
 void CAVL::obrocLL(TWezel * wezel) {
-    printf("LL\n");
+//    printf("LL\n");
     TWezel * dziecko = wezel->lewy;
     wezel->lewy = dziecko->prawy;
     if ( dziecko->prawy ) {
@@ -65,7 +65,7 @@ void CAVL::obrocLL(TWezel * wezel) {
 }
 
 void CAVL::obrocRR(TWezel * wezel) {
-    printf("RR\n");
+//    printf("RR\n");
     TWezel * dziecko = wezel->prawy;
     wezel->prawy = dziecko->lewy;
     if ( dziecko->lewy ) {
@@ -93,7 +93,7 @@ void CAVL::obrocRR(TWezel * wezel) {
 }
 
 void CAVL::obrocLR(TWezel * wezel) {
-    printf("LR\n");
+//    printf("LR\n");
     TWezel * dziecko = wezel->lewy;
     TWezel * nastepneDziecko = dziecko->prawy;
     int tmp = wezel->klucz;
@@ -116,7 +116,7 @@ void CAVL::obrocLR(TWezel * wezel) {
 }
 
 void CAVL::obrocRL(TWezel * wezel) {
-    printf("RL\n");
+//    printf("RL\n");
     TWezel * dziecko = wezel->prawy;
     TWezel * nastepneDziecko = dziecko->lewy;
     int tmp = wezel->klucz;
